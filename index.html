@@ -1,35 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Chatbot Test</title>
+    <meta charset="UTF-8">
+    <title>Dark Blue Chatbot</title>
+    <style>
+        /* Fullscreen styling */
+        .fullscreen-chat {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 100vw !important;
+            height: 100vh !important;
+            z-index: 9999 !important;
+            border-radius: 0 !important;
+            max-height: none !important;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello from GitHub Pages</h1>
+    <h1>Welcome to My Dark Blue Chatbot Page</h1>
 
+    <!-- Chatbot Configuration -->
     <script>
         window.ChatWidgetConfig = {
             webhook: {
-                url: "https://webhook.site/xxxxxx", // for testing only
+                url: "https://cxk1.app.n8n.cloud/webhook/54a06a7f-fa96-4ad2-86ae-41172400426b/chat", // Replace with your actual webhook
                 route: 'general'
             },
             branding: {
-                logo: 'https://via.placeholder.com/50',
-                name: 'Test Bot',
-                welcometext: 'Hello there!',
-                responseTimeText: 'Start a chat'
+                logo: 'https://via.placeholder.com/50', // Replace with your real logo
+                name: 'Meep AI',
+                welcometext: 'Welcome to the dark side 😎',
+                responseTimeText: 'Usually responds instantly'
             },
             style: {
-                primaryColour: '#0000ff',
-                secondaryColour: '#00ff00',
+                primaryColour: '#0a192f',       // Very dark blue
+                secondaryColour: '#1e3a8a',     // Medium-dark blue
                 position: 'right',
-                backgroundColour: '#ffffff',
-                frontColour: '#333333'
+                backgroundColour: '#0a192f',    // Match widget background
+                frontColour: '#ffffff'          // White text for contrast
             },
-            suggestions: ['Hi', 'Help', 'What is this?']
+            suggestions: ['What can you do?', 'Tell me a joke', 'Help with something']
         };
     </script>
 
+    <!-- Load the Chat Widget -->
     <script src="https://cdn.jsdelivr.net/gh/funtastic418/chat-widget@main/chat-widget.js"></script>
+
+    <!-- Fullscreen toggle logic -->
+    <script>
+        const observer = new MutationObserver((mutations, obs) => {
+            const chatContainer = document.querySelector(".chat-container");
+            const chatButton = document.querySelector(".chat-button");
+
+            if (chatContainer && chatButton) {
+                chatButton.addEventListener("click", () => {
+                    chatContainer.classList.toggle("fullscreen-chat");
+                });
+
+                obs.disconnect(); // Stop observing once initialized
+            }
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    </script>
 </body>
 </html>
 
