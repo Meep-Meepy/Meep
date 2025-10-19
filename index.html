@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <title>Dark Blue Chatbot – Meep AI</title>
+
   <style>
-    /* Fullscreen toggle */
+    /* ✅ Fullscreen chat style */
     .fullscreen-chat {
       position: fixed !important;
       top: 0;
@@ -16,7 +17,7 @@
       max-height: none !important;
     }
 
-    /* Input styling */
+    /* ✅ Input field styling */
     .chat-assist-widget input,
     .chat-assist-widget textarea {
       background-color: #ffffff !important;
@@ -33,22 +34,33 @@
       color: #ffffff !important;
     }
 
-    /* ✅ BOT & USER MESSAGE VISIBILITY */
+    /* ✅ BOT message style fix */
     .chat-message.bot {
-      background-color: #1e3a8a !important;  /* Dark blue bot bubble */
-      color: #ffffff !important;             /* White text */
+      background-color: #1e3a8a !important;
+      color: #ffffff !important;
+      border-radius: 10px !important;
+      padding: 10px !important;
+      margin: 5px 0 !important;
+      max-width: 80%;
+      white-space: pre-wrap;
     }
 
+    /* ✅ USER message style */
     .chat-message.user {
-      background-color: #ffffff !important;  /* White user bubble */
-      color: #0a192f !important;             /* Dark text */
+      background-color: #ffffff !important;
+      color: #0a192f !important;
+      border-radius: 10px !important;
+      padding: 10px !important;
+      margin: 5px 0 !important;
+      max-width: 80%;
+      white-space: pre-wrap;
     }
   </style>
 </head>
 <body>
   <h1>Welcome to Meep AI Chatbot</h1>
 
-  <!-- Widget Configuration -->
+  <!-- ✅ Widget Configuration -->
   <script>
     window.ChatWidgetConfig = {
       webhook: {
@@ -56,14 +68,14 @@
         route: 'general'
       },
       branding: {
-        logo: 'https://via.placeholder.com/50', // Replace with your logo
+        logo: 'https://via.placeholder.com/50', // Replace with your logo URL
         name: 'Meep AI',
         welcometext: 'Ask me anything :D',
         responseTimeText: 'Click the button below to start chatting'
       },
       style: {
-        primaryColour: '#0a192f',       // Very dark navy
-        secondaryColour: '#1e3a8a',     // Medium dark blue
+        primaryColour: '#0a192f',
+        secondaryColour: '#1e3a8a',
         backgroundColour: '#0a192f',
         frontColour: '#ffffff',
         position: 'right'
@@ -76,23 +88,23 @@
     };
   </script>
 
-  <!-- Load the Chat Widget Script -->
+  <!-- ✅ Load Widget -->
   <script src="https://cdn.jsdelivr.net/gh/funtastic418/chat-widget@main/chat-widget.js"></script>
 
-  <!-- Post-load: override widget variables & enable fullscreen -->
+  <!-- ✅ Apply Theme + Fullscreen Toggle -->
   <script>
     const observer = new MutationObserver(() => {
       const widget = document.querySelector(".chat-assist-widget");
 
       if (widget) {
-        // Override widget CSS variables for dark theme
+        // Force theme overrides
         widget.style.setProperty("--chat-widget-primary", "#0a192f");
         widget.style.setProperty("--chat-widget-secondary", "#0a192f");
         widget.style.setProperty("--chat-widget-tertiary", "#1e3a8a");
         widget.style.setProperty("--chat-widget-bg", "#0a192f");
         widget.style.setProperty("--chat-widget-text", "#ffffff");
 
-        // Fullscreen toggle logic
+        // Fullscreen toggle setup
         const chatButton = document.querySelector(".chat-button");
         const chatContainer = document.querySelector(".chat-container");
 
@@ -102,7 +114,7 @@
           });
         }
 
-        observer.disconnect(); // Stop observing once initialized
+        observer.disconnect();
       }
     });
 
@@ -110,6 +122,7 @@
   </script>
 </body>
 </html>
+
 
 
 
