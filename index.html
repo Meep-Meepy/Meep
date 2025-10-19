@@ -2,27 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dark Blue Chatbot Test</title>
+  <title>Dark Blue Chatbot – Meep AI</title>
   <style>
+    /* Fullscreen toggle class */
     .fullscreen-chat {
       position: fixed !important;
       top: 0;
       left: 0;
       width: 100vw !important;
       height: 100vh !important;
-      z‑index: 9999 !important;
+      z-index: 9999 !important;
       border-radius: 0 !important;
       max-height: none !important;
     }
-    /* Full override */
-    .chat-button, .chat-container, .chat-header, .chat-footer, .chat-message.bot, .chat-message.user {
+
+    /* Override widget colours to dark blue theme */
+    .chat-button,
+    .chat-button * {
       background-color: #0a192f !important;
       color: #ffffff !important;
-      border-color: #1e3a8a !important;
+      border-color: #0a192f !important;
     }
+
+    .chat-container,
+    .chat-container *,
+    .chat-container .chat-header,
+    .chat-container .chat-header *,
+    .chat-container .chat-footer,
+    .chat-container .chat-footer * {
+      background-color: #0a192f !important;
+      color: #ffffff !important;
+    }
+
     .chat-message.bot {
       background-color: #1e3a8a !important;
+      color: #ffffff !important;
     }
+
     .chat-message.user {
       background-color: #ffffff !important;
       color: #0a192f !important;
@@ -30,45 +46,57 @@
   </style>
 </head>
 <body>
+  <h1>Welcome to Meep AI Chatbot</h1>
 
-<script>
-  window.ChatWidgetConfig = {
-    webhook: {
-      url: "https://cxk1.app.n8n.cloud/webhook/54a06a7f‑fa96‑4ad2‑86ae‑41172400426b/chat",
-      route: 'general'
-    },
-    branding: {
-      logo: 'https://via.placeholder.com/50',
-      name: 'Meep AI',
-      welcometext: 'Ask me anything :D',
-      responseTimeText: 'Click the button below to start chatting'
-    },
-    style: {
-      primaryColour: '#0a192f',
-      secondaryColour: '#1e3a8a',
-      position: 'right',
-      backgroundColour: '#0a192f',
-      frontColour: '#ffffff'
-    },
-    suggestions: ['What are your hours?', 'Can I speak to support?', 'Tell me a joke']
-  };
-</script>
+  <!-- Widget Configuration -->
+  <script>
+    window.ChatWidgetConfig = {
+      webhook: {
+        url: "https://cxk1.app.n8n.cloud/webhook/54a06a7f‑fa96‑4ad2‑86ae‑41172400426b/chat", // Replace with your webhook URL
+        route: 'general'
+      },
+      branding: {
+        logo: 'https://via.placeholder.com/50', // Replace with your logo URL
+        name: 'Meep AI',
+        welcometext: 'Ask me anything :D',
+        responseTimeText: 'Click the button below to start chatting'
+      },
+      style: {
+        primaryColour: '#0a192f',        // Very dark blue
+        secondaryColour: '#1e3a8a',      // Medium dark blue
+        position: 'right',
+        backgroundColour: '#0a192f',     // Match background
+        frontColour: '#ffffff'            // White text
+      },
+      suggestions: [
+        'What are your hours?',
+        'Can I speak to support?',
+        'Tell me a joke'
+      ]
+    };
+  </script>
 
-<script src="https://cdn.jsdelivr.net/gh/funtastic418/chat-widget@main/chat-widget.js"></script>
-<script>
-  const observer = new MutationObserver((mutations, obs) => {
-    const chatContainer = document.querySelector(".chat-container");
-    const chatButton = document.querySelector(".chat-button");
-    if (chatContainer && chatButton) {
-      chatButton.addEventListener("click", () => {
-        chatContainer.classList.toggle("fullscreen-chat");
-      });
-      obs.disconnect();
-    }
-  });
-  observer.observe(document.body, { childList: true, subtree: true });
-</script>
+  <!-- Load Chat Widget Script -->
+  <script src="https://cdn.jsdelivr.net/gh/funtastic418/chat-widget@main/chat-widget.js"></script>
 
+  <!-- Fullscreen toggle logic -->
+  <script>
+    const observer = new MutationObserver((mutations, obs) => {
+      const chatContainer = document.querySelector(".chat-container");
+      const chatButton = document.querySelector(".chat-button");
+      if (chatContainer && chatButton) {
+        chatButton.addEventListener("click", () => {
+          chatContainer.classList.toggle("fullscreen-chat");
+        });
+        obs.disconnect();
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  </script>
 </body>
 </html>
 
