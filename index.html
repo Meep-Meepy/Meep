@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Dark Blue Chatbot – Meep AI</title>
   <style>
+    /* Make chat fullscreen when toggled */
     .fullscreen-chat {
       position: fixed !important;
       top: 0;
@@ -14,12 +15,29 @@
       border-radius: 0 !important;
       max-height: none !important;
     }
+
+    /* FIX: Input and text visibility in dark mode */
+    .chat-assist-widget input,
+    .chat-assist-widget textarea {
+      background-color: #ffffff !important;
+      color: #0a192f !important;
+      border: 1px solid #1e3a8a !important;
+    }
+
+    .chat-assist-widget input::placeholder,
+    .chat-assist-widget textarea::placeholder {
+      color: #64748b !important;
+    }
+
+    .chat-assist-widget button {
+      color: #ffffff !important;
+    }
   </style>
 </head>
 <body>
   <h1>Welcome to Meep AI Chatbot</h1>
 
-  <!-- Widget Config -->
+  <!-- Chatbot Configuration -->
   <script>
     window.ChatWidgetConfig = {
       webhook: {
@@ -27,14 +45,14 @@
         route: 'general'
       },
       branding: {
-        logo: 'https://via.placeholder.com/50',
+        logo: 'https://via.placeholder.com/50', // Replace with your logo
         name: 'Meep AI',
         welcometext: 'Ask me anything :D',
         responseTimeText: 'Click the button below to start chatting'
       },
       style: {
-        primaryColour: '#0a192f',
-        secondaryColour: '#1e3a8a',
+        primaryColour: '#0a192f',       // Dark navy
+        secondaryColour: '#1e3a8a',     // Medium dark blue
         backgroundColour: '#0a192f',
         frontColour: '#ffffff',
         position: 'right'
@@ -43,32 +61,33 @@
     };
   </script>
 
-  <!-- Load Widget -->
+  <!-- Load Chat Widget -->
   <script src="https://cdn.jsdelivr.net/gh/funtastic418/chat-widget@main/chat-widget.js"></script>
 
-  <!-- Modify CSS Variables After Widget Loads -->
+  <!-- JS: Override widget theme variables + fullscreen toggle -->
   <script>
     const observer = new MutationObserver(() => {
       const widget = document.querySelector(".chat-assist-widget");
 
       if (widget) {
-        // Override CSS variables
+        // Override widget theme colors
         widget.style.setProperty("--chat-widget-primary", "#0a192f");
         widget.style.setProperty("--chat-widget-secondary", "#0a192f");
         widget.style.setProperty("--chat-widget-tertiary", "#1e3a8a");
         widget.style.setProperty("--chat-widget-bg", "#0a192f");
         widget.style.setProperty("--chat-widget-text", "#ffffff");
 
-        // Allow fullscreen toggle
+        // Enable fullscreen toggle
         const chatButton = document.querySelector(".chat-button");
         const chatContainer = document.querySelector(".chat-container");
+
         if (chatButton && chatContainer) {
           chatButton.addEventListener("click", () => {
             chatContainer.classList.toggle("fullscreen-chat");
           });
         }
 
-        observer.disconnect();
+        observer.disconnect(); // Stop observing once applied
       }
     });
 
